@@ -1,0 +1,14 @@
+version: "3.5"
+services:
+  static_files:
+    image: node:lts-alpine
+    container_name: static_files
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${PORT}
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "${PORT}:${PORT}"
+    command: sh -c 'npm list express || npm install express && npm start'
