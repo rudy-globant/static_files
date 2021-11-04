@@ -1,0 +1,23 @@
+version: "3.5"
+
+networks:
+  nginx_default:
+    external: true
+
+services:
+  static_files:
+    image: node:lts-alpine
+    container_name: static_files
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${PORT}
+      - VIRTUAL_HOST=virtual.localhost
+      - VIRTUAL_PORT=${PORT}
+    networks:
+      - nginx_default
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - ${PORT}:${PORT}
+    command: sh -c 'npm list express || npm install express && npm start'
