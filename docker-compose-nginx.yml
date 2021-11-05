@@ -8,6 +8,7 @@ services:
   static_files:
     image: node:lts-alpine
     container_name: static_files
+    restart: always
     environment:
       - NODE_ENV=${NODE_ENV}
       - PORT=${PORT}
